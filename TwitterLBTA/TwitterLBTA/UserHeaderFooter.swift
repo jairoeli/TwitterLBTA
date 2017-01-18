@@ -20,6 +20,8 @@ class UserHeader: DatasourceCell {
   // MARK: - Set up
   override func setupViews() {
     super.setupViews()
+    backgroundColor = .white
+    
     addSubview(textLabel)
     
     separatorLineView.isHidden = false
@@ -38,11 +40,19 @@ class UserFooter: DatasourceCell {
     $0.textColor = twitterBlue
   }
   
+  let whiteBackgroundView = UIView {
+    $0.backgroundColor = .white
+  }
+  
   // MARK: - Set up
   override func setupViews() {
     super.setupViews()
     
+    addSubview(whiteBackgroundView)
     addSubview(textLabel)
-    textLabel.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+    
+    whiteBackgroundView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 14, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+    
+    textLabel.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: 14, rightConstant: 0, widthConstant: 0, heightConstant: 0)
   }
 }
