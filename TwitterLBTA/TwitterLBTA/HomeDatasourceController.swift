@@ -7,6 +7,8 @@
 //
 
 import LBTAComponents
+import TRON
+import SwiftyJSON
 
 class HomeDatasourceController: DatasourceController {
   
@@ -16,9 +18,27 @@ class HomeDatasourceController: DatasourceController {
     setupNavigationBarItems()
     
     collectionView?.backgroundColor = UIColor(r: 232, g: 236, b: 241)
+
+    fetchHomeFeed()
+  }
+  
+  // MARK: - JSON
+  
+  let tron = TRON(baseURL: "http://api.letsbuildthatapp.com")
+  
+  fileprivate func fetchHomeFeed() {
+    // start our json fetch
+    let request: APIRequest<HomeDatasource, JSONError> = tron.request("/twitter/home")
     
-    let homeDatasource = HomeDatasource()
-    self.datasource = homeDatasource
+    request.perform(withSuccess: { (homeDatasource) in
+      print("Successfully fetched our json objects")
+      print(homeDatasource.users.count)
+      
+      self.datasource = homeDatasource
+      
+    }) { (err) in
+      print("Failed to fetch json...", err)
+    }
   }
   
   // MARK: - Collection View
