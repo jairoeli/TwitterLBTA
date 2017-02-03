@@ -18,7 +18,7 @@ class HomeDatasourceController: DatasourceController {
     setupNavigationBarItems()
     
     collectionView?.backgroundColor = UIColor(r: 232, g: 236, b: 241)
-
+    
     fetchHomeFeed()
   }
   

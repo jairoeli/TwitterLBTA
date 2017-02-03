@@ -12,25 +12,9 @@ import SwiftyJSON
 
 class HomeDatasource: Datasource, JSONDecodable {
   
-  let users: [User]
+  // MARK: - Properties
   
-  required init(json: JSON) throws {
-    
-    var users = [User]()
-    let array = json["users"].array
-    
-    for userJson in array!  {
-      let name = userJson["name"].stringValue
-      let username = userJson["username"].stringValue
-      let bio = userJson["bio"].stringValue
-      
-      let user = User(name: name, username: username, bioText: bio, profileImage: UIImage())
-      
-      users.append(user)
-    }
-    
-    self.users = users
-  }
+  let users: [User]
   
   let tweets: [Tweet] = {
     let jairoUser = User(name: "Jairo Eli de León", username: "@jairoelid", bioText: "iOS engineer, originally from the land of the breakfast taco. @GallaudetU & @DevMtn alum. Spaghetti enthusiast.", profileImage: #imageLiteral(resourceName: "profile_image"))
@@ -40,6 +24,26 @@ class HomeDatasource: Datasource, JSONDecodable {
     
     return [tweet, tweet2]
   }()
+  
+  // MARK: - JSON
+  required init(json: JSON) throws {
+    
+    var users = [User]()
+    
+    if let array = json["users"].array {
+      
+      for userJson in array {
+        let name = userJson["name"].stringValue
+        let username = userJson["username"].stringValue
+        let bio = userJson["bio"].stringValue
+        
+        let user = User(name: name, username: username, bioText: bio, profileImage: UIImage())
+        users.append(user)
+      }
+    }
+    
+    self.users = users
+  }
   
   // MARK: - Register classes
   override func footerClasses() -> [DatasourceCell.Type]? {
