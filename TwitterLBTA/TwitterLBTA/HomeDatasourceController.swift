@@ -1,4 +1,4 @@
-//
+ //
 //  HomeDatasourceController.swift
 //  TwitterLBTA
 //
@@ -19,26 +19,10 @@ class HomeDatasourceController: DatasourceController {
     
     collectionView?.backgroundColor = UIColor(r: 232, g: 236, b: 241)
     
-    fetchHomeFeed()
-  }
-  
-  // MARK: - JSON
-  
-  let tron = TRON(baseURL: "http://api.letsbuildthatapp.com")
-  
-  fileprivate func fetchHomeFeed() {
-    // start our json fetch
-    let request: APIRequest<HomeDatasource, JSONError> = tron.request("/twitter/home")
-    
-    request.perform(withSuccess: { (homeDatasource) in
-      print("Successfully fetched our json objects")
-      print(homeDatasource.users.count)
-      
+    Service.sharedInstance.fetchHomeFeed { (homeDatasource) in
       self.datasource = homeDatasource
-      
-    }) { (err) in
-      print("Failed to fetch json...", err)
     }
+    
   }
   
   // MARK: - Collection View
