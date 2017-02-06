@@ -15,6 +15,7 @@ struct Service {
   let tron = TRON(baseURL: "https://api.letsbuildthatapp.com")
   
   static let sharedInstance = Service()
+  private init() {} //This prevents others from using the default '()' initializer for this struct.
   
   func fetchHomeFeed(completion: @escaping (HomeDatasource) -> ()) {
     print("Fetching home feed")
