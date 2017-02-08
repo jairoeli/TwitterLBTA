@@ -15,34 +15,15 @@ class HomeDatasource: Datasource, JSONDecodable {
   // MARK: - Properties
   
   let users: [User]
-  
-  let tweets: [Tweet] = {
-    let jairoUser = User(name: "Jairo Eli de León", username: "@jairoelid", bioText: "iOS engineer, originally from the land of the breakfast taco. @GallaudetU & @DevMtn alum. Spaghetti enthusiast.", profileImage: #imageLiteral(resourceName: "profile_image"))
-    
-    let tweet = Tweet(user: jairoUser, message: "Passion is the only resource you can afford. It helps you to realize your dream because it forces you to keep that dream real. #PowerOfBroke")
-    let tweet2 = Tweet(user: jairoUser, message: "To me, programming is more than an important practical art. It is also a gigantic undertaking in the foundations of knowledge. - Grace Hopper")
-    
-    return [tweet, tweet2]
-  }()
+  let tweets: [Tweet]
   
   // MARK: - JSON
   required init(json: JSON) throws {
+    let usersJsonArray = json["users"].array
+    self.users = usersJsonArray!.map { User(json: $0) }
     
-    var users = [User]()
-    
-    if let array = json["users"].array {
-      
-      for userJson in array {
-        let name = userJson["name"].stringValue
-        let username = userJson["username"].stringValue
-        let bio = userJson["bio"].stringValue
-        
-        let user = User(name: name, username: username, bioText: bio, profileImage: UIImage())
-        users.append(user)
-      }
-    }
-    
-    self.users = users
+    let tweetsJsonArray = json["tweets"].array
+    self.tweets = tweetsJsonArray!.map { Tweet(json: $0) }
   }
   
   // MARK: - Register classes
