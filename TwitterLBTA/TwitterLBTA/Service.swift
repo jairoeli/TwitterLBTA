@@ -17,16 +17,14 @@ struct Service {
   static let sharedInstance = Service()
   private init() {} //This prevents others from using the default '()' initializer for this struct.
   
-  func fetchHomeFeed(completion: @escaping (HomeDatasource) -> ()) {
-    print("Fetching home feed")
+  func fetchHomeFeed(completion: @escaping (HomeDatasource?, Error?) -> ()) {
     
     let request: APIRequest<HomeDatasource, JSONError> = tron.request("/twitter/home")
     
     request.perform(withSuccess: { (homeDatasource) in
-      print("Successfully fetched our json objects")
-      completion(homeDatasource)
+      completion(homeDatasource, nil)
     }) { (err) in
-      print("Failed to fetch json...", err)
+      completion(nil, err)
     }
     
   }
