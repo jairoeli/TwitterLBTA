@@ -39,6 +39,7 @@ class TweetCell: DatasourceCell {
   let messageTextView = UITextView {
     $0.text = "SOME SAMPLE TEXT"
     $0.backgroundColor = .clear
+    $0.isUserInteractionEnabled = false
   }
   
   let profileImageView: CachedImageView = {

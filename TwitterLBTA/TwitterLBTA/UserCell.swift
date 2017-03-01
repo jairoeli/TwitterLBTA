@@ -45,6 +45,7 @@ class UserCell: DatasourceCell {
     $0.text = "iOS engineer, originally from the land of the breakfast taco. @GallaudetU & @DevMtn alum. Spaghetti enthusiast."
     $0.font = UIFont.systemFont(ofSize: 15)
     $0.backgroundColor = .clear
+    $0.isUserInteractionEnabled = false
   }
   
   let followButton = UIButton {
