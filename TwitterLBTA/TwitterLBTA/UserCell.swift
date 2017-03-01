@@ -16,7 +16,7 @@ class UserCell: DatasourceCell {
       nameLabel.text = user.name
       usernameLabel.text = user.username
       bioTextView.text = user.bioText
-      profileImageView.image = user.profileImage
+      profileImageView.loadImage(urlString: user.profileImageURL)
     }
   }
   
@@ -27,11 +27,13 @@ class UserCell: DatasourceCell {
     $0.font = UIFont.boldSystemFont(ofSize: 16)
   }
   
-  let profileImageView = UIImageView {
-    $0.image = #imageLiteral(resourceName: "profile_image")
-    $0.layer.cornerRadius = 5
-    $0.clipsToBounds = true
-  }
+  let profileImageView: CachedImageView = {
+    let imageView = CachedImageView()
+    imageView.image = #imageLiteral(resourceName: "profile_image")
+    imageView.layer.cornerRadius = 5
+    imageView.clipsToBounds = true
+    return imageView
+  }()
   
   let usernameLabel = UILabel {
     $0.text = "@jairoelid"
