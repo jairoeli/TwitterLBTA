@@ -1,4 +1,4 @@
-# Twitter
+# TwitterLBTA
 
 A clone of Twitter iOS app written in Swift.
 
@@ -12,4 +12,4 @@ A clone of Twitter iOS app written in Swift.
 
 ## License
 
-Colorscope is under MIT license. See the [LICENSE](./LICENSE.md) file for more info.
+TwitterLBTA is under MIT license. See the [LICENSE](./LICENSE.md) file for more info.
